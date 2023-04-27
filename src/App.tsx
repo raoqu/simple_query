@@ -2,11 +2,11 @@ import React from 'react';
 import { Card, Col, Row, Divider, Form, Input, Button, message } from 'antd';
 import axios from 'axios';
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 interface FormData {
   username: string;
-  password: string;
+  mobile: string;
 }
 
 
@@ -18,9 +18,9 @@ function App() {
   const handleSubmit = (values: FormData) => {
     setSubmitting(true);
     setTimeout(() => {
-      axios.post('/score', values)
-        .then(() => {
-          message.success('Login success');
+      axios.post('/api/query', values)
+        .then((response) => {
+          setResult(response.data);
         })
         .catch(() => {
           setResult("查询失败")
